@@ -2,6 +2,7 @@ import static java.lang.System.out;
 import static java.lang.System.err;
 import static java.nio.file.Paths.get;
 import static java.nio.file.Files.deleteIfExists;
+import static java.nio.file.Files.exists;
 import static java.nio.file.Files.walkFileTree;
 import static java.nio.file.Files.exists;
 import static javax.tools.ToolProvider.getSystemJavaCompiler;
@@ -19,8 +20,10 @@ class build
   public static void main(String[] args)
   throws IOException
   {
-    out.println("BUILDING THE HANDMADE JAVA PROJECT!");
- 		var src = new Path[]{get("src/Main.java")};
+    out.println("BUILDING THE HANDMADE JAVA PROJECT (LOL)!");
+ 		var src = get("src");
+ 		var mainMod = get("src/main/module-info.java");
+ 		var main = get("src/main/main/Main.java");
  		var bld = get("bld");
  		var locale = Locale.getDefault();
     var utf8 = StandardCharsets.UTF_8;
@@ -34,6 +37,8 @@ class build
 		* TODO: different parts of the application probably will require different strictness. we can apply them per package/module/naming-pattern/...
 		*/
 		var options = List.of(
+			"--module-source-path", src.toString(), // input location of all source files. they have to be modules!
+			"-d", bld.toString(), //output class files to build folder
 			"-g", //generate debug info
 			"-Werror", //quit on warnings
 			"-Xdoclint:all", //warn about malformed docs
@@ -43,15 +48,12 @@ class build
 			"-verbose", //to learn what happens
 			"--limit-modules", "java.base", //by limiting the modules, we prevent loading of unused ones.
 			"-deprecation", //print uses of deprecated code
-			"-d", bld.toString(), //output class files to build folder
-			"-encoding", utf8.toString(), //expected encoding of source files
-			"--release", "11" //complile for given version.
-												 //This way we can upgrade the JDK without immediatly breaking the project.
+			"-encoding", utf8.toString() //expected encoding of source files
 			);
     var javac = getSystemJavaCompiler();
 		var diagnostics = new DiagnosticCollector<JavaFileObject>();
     var file_manager = javac.getStandardFileManager(diagnostics, locale, utf8);
-    var compilation_units = file_manager.getJavaFileObjects(src);
+    var compilation_units = file_manager.getJavaFileObjects(mainMod, main);
     deleteDir(bld);
     javac.getTask(new PrintWriter(err), file_manager, diagnostics, options, null, compilation_units).call();
     diagnostics.getDiagnostics().stream()
@@ -67,6 +69,10 @@ class build
   static void deleteDir(Path dir)
   throws IOException
   {
+	  if(!exists(dir)){
+			return;
+	  }
+	  
   	walkFileTree(dir,
       new SimpleFileVisitor<>() {
         @Override public FileVisitResult postVisitDirectory( Path dir, IOException __)
