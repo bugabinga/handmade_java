@@ -26,7 +26,8 @@ The following aspects of performance are important to us:
 
 - Application startup time.
 	Java is notoriously bad in this sector ([link to benchmarks]), which means here exists room to grow.
-	TODO: `jlink` allows to build minimal java application images. What kind of startup times are realistic here?
+	> `jlink` allows to build minimal java application images. What kind of startup times are realistic here?
+	> Turns out, not much. Testing an image with `java.base` and `jdk.compiler` yielded no measurable difference in wall time.
 - RAM usage.
   Also one of Javas most cited weaknesses. 
   We will try to keep it as low as practically possible.
@@ -150,5 +151,71 @@ The rich JDK is what will allow us to get away with forgoing third party depende
 	- monitoring: monitor health and status of server side component
 	- Concurrency: network calls, keeping UI response during IO
 	- opportunity for multiple GCs: GUI, server and standalone mode
+
+## The minimal Java module
+
+What is the simplest `Hello World`-type module one can build with Java modules?
+2 files, 2 folders and one build imvocation.
+
+First, a folder named after the module is needed:
+
+```sh
+mkdir <name>
+cd <name>
+```
+Then, a file called `module-info.java` declares the modules name, dependencies and exports.
+```java
+module <name> {}
+```
+
+The simplest module depends on nothing, except for `java.base` implicitly and exports nothing.
+Now, we would like to create a main class file with the typical `main(String[] args)` entry point.
+However, there is a problem.
+A module requires at least one package and disallows classes in its "default package".
+So we create a package, named after the module, because at this point, there is no other sensible name to choose.
+
+```sh
+mkdir <name>
+cd <name>
+```
+
+Here we create `Main.java`:
+
+```java
+package main;
+class Main
+{
+  public static void main(String[] command_line_arguments){}
+}
+```
+
+This gives the following file hierarchy:
+
+```
+- <name>
+  - module-info.java 
+  - <name> 
+    - Main.java
+```
+
+Build and run it with:
+
+```sh
+cd ../..
+javac --module-source-path . --module <name> -d .
+java --module-path . --module <name>/<name>.Main
+```
+
+TODO: link to javac docs
+
+This probably seems like a lot of boilerplate for something simple as getting started.
+But, while certainly true, it is also irrelevant when considering the number of modules one does likely write.
+Assuming a module count of a medium to large sized application to be between 3 and 300 modules,
+the overhead introduced by the above ceremony is negligible, wehn compared to overall code amount.
+
+### Naming
+
+TODO: app vs lib names
+
 
 TODO: Fill links
