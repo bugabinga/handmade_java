@@ -46,7 +46,7 @@ class build
 			"-Xlint:all", //lint our code
 			"-Xpkginfo:always", //require package-info.java files so that generated Javadoc gets nice comments for packages.
 			"-verbose", //to learn what happens
-			"--limit-modules", "java.base", //by limiting the modules, we prevent loading of unused ones.
+			"--limit-modules", "java.base,java.desktop", //by limiting the modules, we prevent loading of unused ones.
 			"-deprecation", //print uses of deprecated code
 			"-encoding", utf8.toString() //expected encoding of source files
 			);
