@@ -41,7 +41,7 @@ class build
 			"-d", bld.toString(), //output class files to build folder
 			"-g", //generate debug info
 			"-Werror", //quit on warnings
-			"-Xdoclint:all", //warn about malformed docs
+			"-Xdoclint:all/public", //warn about malformed docs
 			"--doclint-format", "html5", //use modern docs
 			"-Xlint:all", //lint our code
 			"-Xpkginfo:always", //require package-info.java files so that generated Javadoc gets nice comments for packages.
