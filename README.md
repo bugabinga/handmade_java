@@ -216,6 +216,45 @@ the overhead introduced by the above ceremony is negligible, wehn compared to ov
 ### Naming
 
 TODO: app vs lib names
+#### Names of packages and modules
 
+The Java community adopted the following naming convention for packages, that now is also carried over to modules.
+
+`reverse domain of your organization`.[`name of the project`.]`actual semantic name for the package`
+
+Some examples:
+
+- `com.google`.`guava`.`collection`
+- `org.junit`.`test`
+- `com.github`.`mbknor`.`json_schema_v4`
+
+As for the actual reasons why and how these conventions got adopted so universally, we can, of course, only speculate.
+However, by analysing what problems this naming pattern fixes, we can get a good indicator.
+More importantly, we develop a informed foundation to invent our own conventions.
+
+In a Java runtime, classes used to live in the _classpath_.
+The _classpath_ is a flat list of classes that get referenced by their package name + class name.
+It does not take long for a software project to reach a size, where naming colloisions in class names do occur.
+This is especially true, when using a lot of third-party code, where you have usually little to no (practical) control over the names.
+Coupled with the fact, that a JVM is required to ignore naming conflicts on the _classpath_ (whichever class happens to be loaded first, "wins"),
+this presents Java programmers with a maintenance nightmare.
+Fortunately, this issue is practically (not technically) solved by the package naming convention.
+
+It generates unique enough names, while being easy enough to use, so that naming collisions on the _classpath_ are rare enough to not care.
+
+> Of course, you still care about this problem, as soon as the dependency graph of your application is large enough, so that a transitive 
+> dependency of multiple versions appears. But we do not need to care about these sorts of issues here. No third-party code :)
+
+The `reverse domain name` part is especially clever because is solved a couple of issues at once.
+
+- It delegates to the DNS to figure out roughly unique mappings of domain to "real world entity" (person or organization)
+- It is reversed, because top-level domians used to be very few in number. This creates a natural sorting order, that keeps the directory
+  structure of packages clean. Because, incidentally, Java packages are encoded as folders on a disk.
+- Domain names and packages share similar naming restrictions and more importantly, the use of the `.` character is already natural in 
+  Java packages.
+ 
+The `name of the project` is sometimes redundant so it gets left out.
+
+#### Names in source code
 
 TODO: Fill links
