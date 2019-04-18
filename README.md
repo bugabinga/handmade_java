@@ -368,15 +368,10 @@ conventions though osmosis and then henceforth perceive it as *normal*.
 
 Identifiers in Java use the following naming patterns:
 
-  - **Constants**:
-    &#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;upper-case
-  - **Types**:&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;capitalized
-    camel-case
-  - **Variables, Parameters, Fields and Methods**: &#9;non-capitalized
-    camel-case
-  - **Type Parameters**:
-    &#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;single
-    upper-cased letter
+  - **Constants**: upper-case
+  - **Types**: capitalized camel-case
+  - **Variables, Parameters, Fields and Methods**: non-capitalized camel-case
+  - **Type Parameters**: single upper-cased letter
 
 The upper-casing of constants is a convention shared by most (C-like) languages.
 It probably dates back to another convention: [ALL CAPS for preprocessor
