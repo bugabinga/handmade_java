@@ -1,12 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.awt.event.*;
+import java.util.concurrent.*;
 /**
  * Demonstrates, that AWT/Swing drops requests to paint, when it deems it necessary.
  * For example, if the previously queued requests are taking too long to fullfill them all.
@@ -15,9 +10,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class RequestSkip
 {
-private static volatile int myRequestsToPost;
-private static volatile int myRequestCount;
-private static int myPaintCount;
+private static volatile int my_request_to_post;
+private static volatile int my_request_count;
+private static int my_paint_count;
+/**
+ * @param args ignored
+ */
 public static void main(String[] args)
 {
   SwingUtilities.invokeLater(() ->
@@ -25,19 +23,19 @@ public static void main(String[] args)
     var content = new JComponent()
     {
       @Override
-      public void paint(Graphics g)
+      public void paint(Graphics gfx)
       {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        g.setColor(Color.WHITE);
-        g.drawString("Press 1 to request 100 repaints", 7, 20);
-        g.drawString("Requests: " + myRequestCount, 7, 37);
-        g.drawString("Repaints: " + myPaintCount, 7, 54);
+        gfx.setColor(Color.BLACK);
+        gfx.fillRect(0, 0, getWidth(), getHeight());
+        gfx.setColor(Color.WHITE);
+        gfx.drawString("Press 1 to request 100 repaints", 7, 20);
+        gfx.drawString("Requests: " + my_request_count, 7, 37);
+        gfx.drawString("Repaints: " + my_paint_count, 7, 54);
         /*
          * Here we stall the paint longer, than we the interval in which we are requesting new paints...
          */
         pause(100);
-        myPaintCount++;
+        my_paint_count++;
       }
     };
     content.setFocusable(true);
@@ -48,18 +46,18 @@ public static void main(String[] args)
       {
         if (event.getKeyCode() == KeyEvent.VK_1)
         {
-          myRequestsToPost = 100;
+          my_request_to_post = 100;
         }
       }
     });
     var pool = Executors.newScheduledThreadPool(1);
     pool.scheduleAtFixedRate(() ->
 		{
-      if (myRequestsToPost > 0)
+      if (my_request_to_post > 0)
       {
-        myRequestCount++;
+        my_request_count++;
         content.repaint();
-        myRequestsToPost--;
+        my_request_to_post--;
       }
     }, 0, 50, TimeUnit.MILLISECONDS);
     var frame = new JFrame("Painting request skip");
@@ -75,7 +73,6 @@ public static void main(String[] args)
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setPreferredSize(new Dimension(400, 300));
     frame.pack();
-    frame.setLocationByPlatform(true);
     frame.setVisible(true);
   });
 }
