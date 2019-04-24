@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
  * The result of batching merges the small regions, so that the interim space gets updated
  * as well.
  * In the worst case, this can mean repainting the whole screen.
- * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/RegionExtension.java">Source</a>
  */
 public class RegionExtension

@@ -7,7 +7,7 @@ import java.util.*;
  * This example might need to be run multiple times to see the effect, because the exact ordering seems platform dependent.
  * That of course means, that if your JVM+platform combo happens to order paint request in insertion order, this example will
  * never demonstrate the "wrong" order. 
- * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/ComponentReordering.java">Source</a>
  */
 public class ComponentReordering

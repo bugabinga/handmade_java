@@ -5,7 +5,7 @@ import java.awt.event.*;
  * Demonstrates, that painting a component, also paints its upper hierarchy (parent).
  * So while it might seem, that a paint method should do "nothing", visible effects can
  * occur.
- * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/ComponentOpacity.java">Source</a>
  */
 public class ComponentOpacity

@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 /**
  * Demonstrates the fact, that the asynch ing pipeline in AWT/Swing results in an unpredictable
  * drawing order.
- * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/QueueDelay.java">Source</a>
  */
 public class QueueDelay

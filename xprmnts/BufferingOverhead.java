@@ -8,7 +8,7 @@ import java.awt.event.*;
  * For the record: OpenJDK 11 on Arch Linux in Wayland (sway), 04/2019.
  * On the other hand, the effect of turning of double buffering is very visible.
  * The time is roughly 2x larger with double buffering for both regions.
- * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-latency-painting-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/BufferingOverhead.java">Source</a>
  */
 public class BufferingOverhead

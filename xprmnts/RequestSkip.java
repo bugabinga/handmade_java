@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 /**
  * Demonstrates, that AWT/Swing drops requests to paint, when it deems it necessary.
  * For example, if the previously queued requests are taking too long to fullfill them all.
- * @see <a href="https://pavelfatin.com/low-l ing-in-awt-and-swing/">Low Latency Palonging in AWT and Swing by Pavel Fatin</a>
+ * @see <a href="https://pavelfatin.com/low-l ing-in-awt-and-swing/">Low Latency Painting in AWT and Swing by Pavel Fatin</a>
  * @see <a href="https://github.com/pavelfatin/low-latency-painting-in-awt-and-swing/blob/master/RequestSkip.java">Source</a>
  */
 public class RequestSkip
